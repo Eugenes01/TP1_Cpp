@@ -74,7 +74,7 @@ int menu(int numTab[], int column) {
                     cout << numTab[i] << " ";
                 }
                 break;
-            case 4 : // Mémoire dynamique
+            case 4 : // MÃ©moire dynamique
                 copyTab(numTab, column);
                 break;
             case 5 : // Quitter
@@ -110,8 +110,7 @@ void setInv(int numTab[], int column) {
 
 void copyTab(int numTab[], int column) {
 
-    int *numTabCopy;
-    numTabCopy = new int[column];
+    int *numTabCopy = new int[column];
 
     for(int i = 0; i < column; i++) {
         numTabCopy[i] = numTab[i];
