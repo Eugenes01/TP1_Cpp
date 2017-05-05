@@ -12,31 +12,35 @@ void copyTab(int[], int);
 
 int main() {
 
-    cout << "TP1 C++ Charles-Olivier Marsolais 2017" << endl;
+    cout << "TP1 C++ C.O.M 2017" << endl;
     cout << "Bonjour cher ami, voici ce que je comprend des bases en C++." << endl << endl;
 
-    // Il ne faut pas allouer un tableau sur la pile (stack) car cela la surchargerait, rendant le programme inefficace
-    // et pouvant causer un crash du � un manque de m�moire. C'est pourquoi il faut allouer un tableau sur le tas (heap).
+    /*
+     Il ne faut pas allouer un tableau sur la pile (stack) car si elle devient saturé le programme va planter.  Mais surtout le fait de mettre
+     un objet ou un tableau sur le tas (heap) permet d'augmenter la portée de cet objet.  Quand un objet est sur la pile et est détruit à la fin de
+     l'exécution de la méthode dans lequel il se trouve et son espace mémoire est libéré permettant à une autre variable de prendre ça place.
+     En utilisant le tas on peut décider quand libéré la mémoire avec "delete" augmentant ainsi la porté de l'objet.
+     C'est pourquoi il faut allouer un tableau sur le tas.
+    */
 
     string nameFile = "myFile.txt";
 
     ifstream myFile (nameFile.c_str());
 
         if(!myFile) {
-            cerr << "Erreur! Pas de service a ce numero!" << endl;
+            cerr << "Erreur! Le fichier " << nameFile << " est introuvable!" << endl;
             return -1;
         }
 
     cout << "Lecture du fichier et entrer des donnees dans un tableau" << endl;
-    int numRead;
-
 
     int column;
     myFile >> column;
     cout << column << endl;
 
-
     int * const numTab = new int[column];
+    int numRead;
+
     int i = 0;
     while(!myFile.eof()){
         myFile >> numRead;
@@ -44,9 +48,7 @@ int main() {
         numTab[i] = numRead;
         i++;
     }
-    //for(int i = 0; i < column; i++){
-    //    cout << numTab[i] << endl;
-    //}
+
     myFile.close();
 
     menu(numTab, column);
@@ -77,7 +79,7 @@ int menu(int numTab[], int column) {
                     cout << numTab[i] << " ";
                 }
                 break;
-            case 4 : // M�moire dynamique
+            case 4 : // Mémoire dynamique
                 copyTab(numTab, column);
                 break;
             case 5 : // Quitter
